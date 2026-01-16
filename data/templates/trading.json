@@ -1,0 +1,24 @@
+{
+  "meta": {"name_key": "tpl_trading", "languages": ["en"], "estimated_build_seconds": 70},
+  "roles": [
+    {"key":"admin","name":"Admin","color":"#aa4400","profile":"admin","position":100},
+    {"key":"merchant","name":"Merchant","color":"#aa7700","profile":"moderation","position":90},
+    {"key":"trusted","name":"Trusted Trader","color":"#66cc66","profile":"member","position":50},
+    {"key":"trader","name":"Trader","color":"#77aa00","profile":"member","position":10}
+  ],
+  "categories": [
+    {"name":"Market","position":1},
+    {"name":"Listings","position":2},
+    {"name":"Disputes & Help","position":3},
+    {"name":"Announcements","position":4}
+  ],
+  "channels": [
+    {"name":"market-rules","type":"text","category":"Market"},
+    {"name":"buy-sell","type":"text","category":"Market"},
+    {"name":"listings","type":"text","category":"Listings"},
+    {"name":"offers","type":"text","category":"Listings"},
+    {"name":"escrow-help","type":"text","category":"Disputes & Help"},
+    {"name":"reports","type":"text","category":"Disputes & Help","overwrites":{"Admin":{"allow":["view_channel"]}}},
+    {"name":"market-announcements","type":"announcement","category":"Announcements"}
+  ]
+}

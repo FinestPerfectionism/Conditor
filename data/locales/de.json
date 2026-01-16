@@ -1,0 +1,19 @@
+{
+  "community_profile": "Community-Profil",
+  "preflight_preview": "Vorschau bereit — dieser Build wird {roles} Rollen und {channels} Kanäle erstellen. Geschätzte Zeit: {eta}s. Fortfahren?",
+  "estimate_ops": "Geschätzte Vorgänge: {total_ops}. Geschätzte Zeit: {eta}s.",
+  "forging_roles": "Erstelle Rollen ({current}/{total})…",
+  "organising_categories": "Organisiere Kategorien ({current}/{total})…",
+  "constructing_channels": "Erstelle Kanäle ({current}/{total})… 🛠️",
+  "binding_permissions": "Binde Berechtigungen (dies kann länger dauern)…",
+  "snapshotting": "Erstelle Snapshot des Builds (optional)…",
+  "build_complete": "Build abgeschlossen — Zusammenfassung: erstellte Rollen: {roles}, erstellte Kanäle: {channels}",
+  "failed_role_create": "Fehler beim Erstellen der Rolle '{name}': {reason}",
+  "failed_channel_create": "Fehler beim Erstellen des Kanals '{name}': {reason}",
+  "rate_limited": "Rate-Limit erreicht — Pause für {retry_after}s. Der Fortschritt wird automatisch fortgesetzt.",
+  "missing_permissions": "Benötigte Berechtigung fehlt: {permission}. Gewähren und erneut versuchen.",
+  "dry_run_notice": "Trockenlauf: Es wurden keine Änderungen vorgenommen.",
+  "cancel_ack": "Build vom Benutzer abgebrochen.",
+  "preview_diff": "Vorschau-Differenz: {diff_summary}",
+  "dry_flag_hint": "Für einen Trockenlauf 'dry=true' an den Befehl anhängen."
+}
