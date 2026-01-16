@@ -13,8 +13,10 @@ GUILD_ID = os.getenv("CONDITOR_GUILD_ID") or os.getenv("CONDITOR_GUILD")
 intents = discord.Intents.default()
 intents.guilds = True
 intents.members = True
+intents.message_content = True
 
-bot = commands.Bot(command_prefix="!", intents=intents)
+# Use 'C!' as the prefix per project convention
+bot = commands.Bot(command_prefix="C!", intents=intents)
 
 # Shared build queue for jobs
 build_queue: asyncio.Queue = asyncio.Queue()
@@ -55,7 +57,7 @@ async def build_worker():
             build_queue.task_done()
 
 
-def load_cogs():
+async def load_cogs():
     here = Path(__file__).parent
     cogs_dir = here / "cogs"
     for p in cogs_dir.glob("*.py"):
@@ -63,7 +65,7 @@ def load_cogs():
             continue
         ext = f"src.conditor.cogs.{p.stem}"
         try:
-            bot.load_extension(ext)
+            await bot.load_extension(ext)
             print("Loaded cog:", ext)
         except Exception as e:
             print("Failed to load cog", ext, e)
