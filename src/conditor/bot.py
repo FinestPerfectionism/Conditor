@@ -18,6 +18,19 @@ intents.message_content = True
 # Use 'C!' as the prefix per project convention
 bot = commands.Bot(command_prefix="C!", intents=intents)
 
+
+@bot.tree.command(name="conditor_help")
+async def _conditor_help(interaction: discord.Interaction):
+    """Basic in-client help for Conditor (slash command)."""
+    text = (
+        "Conditor bot usage:\n"
+        "- Prefix commands: use `C!` (e.g. `C!template_list`)\n"
+        "- Slash commands: `/template_edit` (use with a template name)\n"
+        "- Admins: use `/template_edit <name>` to edit templates, or `C!template_save`/`C!template_get`.\n"
+        "See the README for full instructions and Render deployment notes."
+    )
+    await interaction.response.send_message(text, ephemeral=True)
+
 # Shared build queue for jobs
 build_queue: asyncio.Queue = asyncio.Queue()
 
@@ -42,6 +55,12 @@ async def on_ready():
             print("Application commands synced (global).")
     except Exception as e:
         print("Failed to sync application commands:", e)
+    # Log registered application commands for debugging
+    try:
+        cmds = list(bot.tree.get_commands())
+        print(f"Registered application commands (count={len(cmds)}): {[c.name for c in cmds]}")
+    except Exception:
+        pass
     print(f"Bot ready: {bot.user} (guilds: {len(bot.guilds)})")
 
 
