@@ -1,0 +1,21 @@
+{
+  "meta": {"name_key": "tpl_music", "languages": ["en"], "estimated_build_seconds": 60},
+  "roles": [
+    {"key":"dj","name":"DJ","color":"#ff00aa","profile":"moderation","position":90},
+    {"key":"curator","name":"Curator","color":"#00cc99","profile":"member","position":50},
+    {"key":"listener","name":"Listener","color":"#00ffcc","profile":"member","position":10}
+  ],
+  "categories": [
+    {"name":"Live","position":1},
+    {"name":"Requests","position":2},
+    {"name":"Playlists","position":3},
+    {"name":"Voice Booths","position":4}
+  ],
+  "channels": [
+    {"name":"now-playing","type":"text","category":"Live"},
+    {"name":"live-chat","type":"text","category":"Live"},
+    {"name":"request-queue","type":"text","category":"Requests"},
+    {"name":"playlists","type":"text","category":"Playlists"},
+    {"name":"voice-booth-1","type":"voice","category":"Voice Booths"}
+  ]
+}

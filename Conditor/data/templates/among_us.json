@@ -1,0 +1,18 @@
+{
+  "meta": {"name_key": "tpl_among_us", "languages": ["en"], "estimated_build_seconds": 60},
+  "roles": [
+    {"key":"host","name":"Host","color":"#ffcc00","profile":"admin","position":90},
+    {"key":"crewmate","name":"Crewmate","color":"#33cc66","profile":"member","position":10},
+    {"key":"impostor","name":"Impostor","color":"#cc3333","profile":"restricted","position":8}
+  ],
+  "categories": [
+    {"name":"Lobby","position":1},
+    {"name":"Games","position":2}
+  ],
+  "channels": [
+    {"name":"welcome","type":"text","category":"Lobby"},
+    {"name":"matchmaking","type":"text","category":"Lobby"},
+    {"name":"game-1","type":"voice","category":"Games"},
+    {"name":"game-2","type":"voice","category":"Games"}
+  ]
+}

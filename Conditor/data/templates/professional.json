@@ -1,0 +1,27 @@
+{
+  "meta": {"name_key": "tpl_professional", "languages": ["en"], "estimated_build_seconds": 80},
+  "roles": [
+    {"key":"ceo","name":"CEO","color":"#660000","profile":"admin","position":110},
+    {"key":"manager","name":"Manager","color":"#003366","profile":"admin","position":100},
+    {"key":"lead","name":"Team Lead","color":"#0066cc","profile":"moderation","position":90},
+    {"key":"employee","name":"Employee","color":"#006699","profile":"member","position":10},
+    {"key":"hr","name":"HR","color":"#cc0066","profile":"moderation","position":95}
+  ],
+  "categories": [
+    {"name":"Company News","position":1},
+    {"name":"Projects","position":2},
+    {"name":"Teams","position":3},
+    {"name":"Meetings","position":4},
+    {"name":"Private","position":99}
+  ],
+  "channels": [
+    {"name":"company-news","type":"announcement","category":"Company News"},
+    {"name":"hr-updates","type":"text","category":"Company News"},
+    {"name":"project-alpha","type":"text","category":"Projects"},
+    {"name":"project-beta","type":"text","category":"Projects"},
+    {"name":"team-sales","type":"text","category":"Teams"},
+    {"name":"team-dev","type":"text","category":"Teams"},
+    {"name":"meeting-room","type":"voice","category":"Meetings"},
+    {"name":"private-board","type":"text","category":"Private","overwrites":{"Manager":{"allow":["view_channel"]}}}
+  ]
+}

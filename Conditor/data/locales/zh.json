@@ -1,0 +1,19 @@
+{
+  "community_profile": "社区配置",
+  "preflight_preview": "预览已准备好 — 此构建将创建 {roles} 个角色，{channels} 个频道。预计时间：{eta} 秒。是否继续？",
+  "estimate_ops": "预计操作数：{total_ops}。预计时间：{eta} 秒。",
+  "forging_roles": "正在创建角色 ({current}/{total})…",
+  "organising_categories": "正在整理分类 ({current}/{total})…",
+  "constructing_channels": "正在创建频道 ({current}/{total})… 🛠️",
+  "binding_permissions": "正在绑定权限（可能需要更久）…",
+  "snapshotting": "正在生成快照（可选）…",
+  "build_complete": "构建完成 — 摘要：已创建角色：{roles}，已创建频道：{channels}",
+  "failed_role_create": "创建角色 '{name}' 失败：{reason}",
+  "failed_channel_create": "创建频道 '{name}' 失败：{reason}",
+  "rate_limited": "遇到速率限制 — 暂停 {retry_after} 秒。进度将自动恢复。",
+  "missing_permissions": "缺少所需权限：{permission}。请授予后重试。",
+  "dry_run_notice": "演练模式：未进行任何更改。",
+  "cancel_ack": "构建已被用户取消。",
+  "preview_diff": "预览差异：{diff_summary}",
+  "dry_flag_hint": "要运行演练，请在命令中添加 'dry=true'。"
+}

@@ -1,0 +1,7 @@
+{
+  "title_key": "community_profile",
+  "questions": [
+    {"key":"community_formality","type":"choice","options":["casual","balanced","formal"],"weight_map":{"casual":{"emoji_density":1.2},"formal":{"emoji_density":0.2}},"localization":{"en":"How formal is your community?"}},
+    {"key":"has_voice","type":"boolean","localization":{"en":"Do you want voice channels?"}}
+  ]
+}

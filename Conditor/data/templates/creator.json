@@ -1,0 +1,29 @@
+{
+  "meta": {"name_key": "tpl_creator", "languages": ["en"], "estimated_build_seconds": 75},
+  "roles": [
+    {"key":"owner","name":"Owner/Creator","color":"#ff66cc","profile":"admin","position":110},
+    {"key":"admin","name":"Admin","color":"#cc4477","profile":"admin","position":100},
+    {"key":"mod","name":"Moderator","color":"#00cc88","profile":"moderation","position":90},
+    {"key":"supporter","name":"Supporter","color":"#ffaa88","profile":"member","position":40},
+    {"key":"patron","name":"Patron","color":"#ffd700","profile":"member","position":60},
+    {"key":"fan","name":"Fan","color":"#66ccff","profile":"member","position":10}
+  ],
+  "categories": [
+    {"name":"Creator Hub","position":1},
+    {"name":"Content","position":2},
+    {"name":"Community","position":3},
+    {"name":"Events & Drops","position":4},
+    {"name":"Staff","position":99}
+  ],
+  "channels": [
+    {"name":"announcements","type":"announcement","category":"Creator Hub"},
+    {"name":"creator-updates","type":"text","category":"Creator Hub"},
+    {"name":"live-streams","type":"text","category":"Content"},
+    {"name":"content-drops","type":"text","category":"Content"},
+    {"name":"fan-art","type":"text","category":"Community"},
+    {"name":"collabs","type":"text","category":"Community"},
+    {"name":"patrons-only","type":"text","category":"Events & Drops","overwrites":{"Patron":{"allow":["view_channel"]}}},
+    {"name":"event-signups","type":"text","category":"Events & Drops"},
+    {"name":"staff-chat","type":"text","category":"Staff","overwrites":{"Moderator":{"allow":["view_channel"]}}}
+  ]
+}
