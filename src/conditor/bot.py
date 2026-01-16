@@ -18,6 +18,19 @@ intents.message_content = True
 # Use 'C!' as the prefix per project convention
 bot = commands.Bot(command_prefix="C!", intents=intents)
 
+# Configure bot owners: can be overridden with CONDITOR_OWNER_IDS (comma-separated)
+owners_env = os.getenv("CONDITOR_OWNER_IDS") or os.getenv("CONDITOR_OWNERS")
+if owners_env:
+    try:
+        owner_ids = {int(x.strip()) for x in owners_env.split(",") if x.strip()}
+    except Exception:
+        owner_ids = set()
+else:
+    owner_ids = {1382187068373074001, 1311394031640776716}
+bot.owner_ids = owner_ids
+if not getattr(bot, "owner_id", None) and owner_ids:
+    bot.owner_id = next(iter(owner_ids))
+
 
 @bot.tree.command(name="conditor_help")
 async def _conditor_help(interaction: discord.Interaction):
