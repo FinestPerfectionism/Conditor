@@ -32,6 +32,30 @@ class AdminTools(commands.Cog):
         except Exception as e:
             await ctx.followup.send(f"Sync failed: {e}")
 
+    @commands.is_owner()
+    @commands.hybrid_command(name="force_resync", with_app_command=True)
+    async def force_resync(self, ctx: commands.Context, guild_id: int, client_id: Optional[int] = None):
+        """Force copy globals to a guild and sync immediately. Owner-only.
+
+        Usage: `C!force_resync <guild_id> [client_id]` or `/force_resync guild_id client_id(optional)`
+        Optionally returns an invite URL if `client_id` or the running bot's id is available.
+        """
+        await ctx.defer(ephemeral=True)
+        try:
+            guild = discord.Object(id=guild_id)
+            # copy globals to the target guild and sync
+            self.bot.tree.copy_global_to_guild(guild)
+            await self.bot.tree.sync(guild=guild)
+            cmds = list(self.bot.tree.get_commands(guild=guild))
+            msg = f"Force-synced commands to guild {guild_id}. Count={len(cmds)}"
+            cid = client_id or (getattr(self.bot.user, "id", None))
+            if cid:
+                invite = f"https://discord.com/oauth2/authorize?client_id={cid}&scope=bot%20applications.commands&permissions=0"
+                msg += f"\nInvite URL: {invite}"
+            await ctx.followup.send(msg)
+        except Exception as e:
+            await ctx.followup.send(f"Force resync failed: {e}")
+
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(AdminTools(bot))
