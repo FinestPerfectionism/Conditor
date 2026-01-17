@@ -4,6 +4,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import discord
 from discord.ext import commands
+import logging
 
 load_dotenv()
 
@@ -25,7 +26,7 @@ class ConditorBot(commands.Bot):
         try:
             await load_cogs(self)
         except Exception as e:
-            print("Failed to load cogs in setup_hook:", e)
+            logging.getLogger("conditor.bot").exception("Failed to load cogs in setup_hook")
 
         # If a development guild is provided, copy globals to that guild for fast iteration
         try:
@@ -45,13 +46,14 @@ class ConditorBot(commands.Bot):
             print("Failed to sync application commands in setup_hook:", e)
         # Debug: list loaded extensions and commands
         try:
-            print("Loaded extensions:", list(self.extensions.keys()))
+            log = logging.getLogger("conditor.bot")
+            log.info("Loaded extensions: %s", list(self.extensions.keys()))
             prefix_cmds = [c.name for c in self.commands]
             app_cmds = [c.name for c in self.tree.get_commands()]
-            print(f"Prefix commands (count={len(prefix_cmds)}): {prefix_cmds}")
-            print(f"Application commands (count={len(app_cmds)}): {app_cmds}")
-        except Exception as e:
-            print("Failed to list commands in setup_hook:", e)
+            log.info("Prefix commands (count=%d): %s", len(prefix_cmds), prefix_cmds)
+            log.info("Application commands (count=%d): %s", len(app_cmds), app_cmds)
+        except Exception:
+            logging.getLogger("conditor.bot").exception("Failed to list commands in setup_hook")
 
 
 # Use 'C!' as the prefix per project convention
@@ -131,20 +133,19 @@ async def build_worker():
 async def load_cogs(bot: commands.Bot):
     here = Path(__file__).parent
     cogs_dir = here / "cogs"
-    print("Discovered cog files:", [p.name for p in cogs_dir.glob("*.py")])
+    logging.getLogger("conditor.bot").info("Discovered cog files: %s", [p.name for p in cogs_dir.glob("*.py")])
     for p in cogs_dir.glob("*.py"):
         if p.name.startswith("_"):
             continue
         ext = f"src.conditor.cogs.{p.stem}"
         try:
-            print(f"Loading extension: {ext}")
+            logging.getLogger("conditor.bot").info("Loading extension: %s", ext)
             await bot.load_extension(ext)
-            print("Loaded cog:", ext)
+            logging.getLogger("conditor.bot").info("Loaded cog: %s", ext)
         except Exception as e:
             import traceback
-
-            print(f"Failed to load cog {ext}: {e}")
-            print(traceback.format_exc())
+            logging.getLogger("conditor.bot").error("Failed to load cog %s: %s", ext, e)
+            logging.getLogger("conditor.bot").error(traceback.format_exc())
 
 
 if __name__ == "__main__":
