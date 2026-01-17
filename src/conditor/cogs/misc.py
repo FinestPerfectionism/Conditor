@@ -3,7 +3,7 @@ from typing import Optional
 import discord
 from discord.ext import commands
 
-FEEDBACK_CHANNEL_ID = 1461827907860041892
+FEEDBACK_CHANNEL_ID = 1462000202410889340
 
 # Basic banned-word filter; expand as needed
 BANNED_WORDS = {"shota", "lolicoin", "badword1"}
