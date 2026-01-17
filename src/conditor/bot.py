@@ -131,15 +131,20 @@ async def build_worker():
 async def load_cogs(bot: commands.Bot):
     here = Path(__file__).parent
     cogs_dir = here / "cogs"
+    print("Discovered cog files:", [p.name for p in cogs_dir.glob("*.py")])
     for p in cogs_dir.glob("*.py"):
         if p.name.startswith("_"):
             continue
         ext = f"src.conditor.cogs.{p.stem}"
         try:
+            print(f"Loading extension: {ext}")
             await bot.load_extension(ext)
             print("Loaded cog:", ext)
         except Exception as e:
-            print("Failed to load cog", ext, e)
+            import traceback
+
+            print(f"Failed to load cog {ext}: {e}")
+            print(traceback.format_exc())
 
 
 if __name__ == "__main__":
