@@ -104,7 +104,11 @@ async def load_cogs():
 
 
 if __name__ == "__main__":
-    load_cogs()
+    # load_cogs is async; run it before starting the bot so commands/cogs register
+    try:
+        asyncio.run(load_cogs())
+    except Exception as e:
+        print("Failed to load cogs:", e)
     if not TOKEN:
         raise RuntimeError("CONDITOR_TOKEN not set in environment")
     bot.run(TOKEN)
