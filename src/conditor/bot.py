@@ -43,6 +43,15 @@ class ConditorBot(commands.Bot):
                 print("Application commands synced (global) in setup_hook.")
         except Exception as e:
             print("Failed to sync application commands in setup_hook:", e)
+        # Debug: list loaded extensions and commands
+        try:
+            print("Loaded extensions:", list(self.extensions.keys()))
+            prefix_cmds = [c.name for c in self.commands]
+            app_cmds = [c.name for c in self.tree.get_commands()]
+            print(f"Prefix commands (count={len(prefix_cmds)}): {prefix_cmds}")
+            print(f"Application commands (count={len(app_cmds)}): {app_cmds}")
+        except Exception as e:
+            print("Failed to list commands in setup_hook:", e)
 
 
 # Use 'C!' as the prefix per project convention
