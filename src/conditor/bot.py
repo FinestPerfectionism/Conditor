@@ -15,8 +15,38 @@ intents.guilds = True
 intents.members = True
 intents.message_content = True
 
+
+class ConditorBot(commands.Bot):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    async def setup_hook(self):
+        # Load cogs before the bot connects so commands/registers persist in this loop
+        try:
+            await load_cogs(self)
+        except Exception as e:
+            print("Failed to load cogs in setup_hook:", e)
+
+        # If a development guild is provided, copy globals to that guild for fast iteration
+        try:
+            if GUILD_ID:
+                try:
+                    gid = int(GUILD_ID)
+                    guild = discord.Object(id=gid)
+                    self.tree.copy_global_to_guild(guild)
+                    await self.tree.sync(guild=guild)
+                    print(f"Application commands synced to guild {gid}.")
+                except Exception as e:
+                    print("Failed to sync to guild in setup_hook:", e)
+            else:
+                await self.tree.sync()
+                print("Application commands synced (global) in setup_hook.")
+        except Exception as e:
+            print("Failed to sync application commands in setup_hook:", e)
+
+
 # Use 'C!' as the prefix per project convention
-bot = commands.Bot(command_prefix="C!", intents=intents)
+bot = ConditorBot(command_prefix="C!", intents=intents)
 
 # Configure bot owners: can be overridden with CONDITOR_OWNER_IDS (comma-separated)
 owners_env = os.getenv("CONDITOR_OWNER_IDS") or os.getenv("CONDITOR_OWNERS")
@@ -89,7 +119,7 @@ async def build_worker():
             build_queue.task_done()
 
 
-async def load_cogs():
+async def load_cogs(bot: commands.Bot):
     here = Path(__file__).parent
     cogs_dir = here / "cogs"
     for p in cogs_dir.glob("*.py"):
@@ -104,11 +134,6 @@ async def load_cogs():
 
 
 if __name__ == "__main__":
-    # load_cogs is async; run it before starting the bot so commands/cogs register
-    try:
-        asyncio.run(load_cogs())
-    except Exception as e:
-        print("Failed to load cogs:", e)
     if not TOKEN:
         raise RuntimeError("CONDITOR_TOKEN not set in environment")
     bot.run(TOKEN)
