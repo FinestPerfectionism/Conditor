@@ -1,11 +1,12 @@
 import re
-import json
 from typing import Optional
-from pathlib import Path
 import discord
 from discord.ext import commands
 
 FEEDBACK_CHANNEL_ID = 1461827907860041892
+
+# Basic banned-word filter; expand as needed
+BANNED_WORDS = {"shota", "lolicoin", "badword1"}
 
 
 def _parse_color(candidate: Optional[str]) -> Optional[int]:
@@ -19,6 +20,14 @@ def _parse_color(candidate: Optional[str]) -> Optional[int]:
     return None
 
 
+def contains_banned(text: str) -> bool:
+    t = re.sub(r"[^a-z0-9]", "", text.lower())
+    for w in BANNED_WORDS:
+        if w in t:
+            return True
+    return False
+
+
 class MiscCog(commands.Cog):
     """Utility commands: embed, say, feedback (prefix + slash/hybrid)."""
 
@@ -26,7 +35,6 @@ class MiscCog(commands.Cog):
         self.bot = bot
 
     async def _respond(self, ctx: commands.Context, content=None, embed=None, ephemeral=False):
-        # Use interaction response if available (slash), otherwise ctx.send
         inter = getattr(ctx, "interaction", None)
         if inter and inter.response and not inter.response.is_done():
             await inter.response.send_message(content=content, embed=embed, ephemeral=ephemeral)
@@ -35,8 +43,6 @@ class MiscCog(commands.Cog):
 
     @commands.command(name="embed")
     async def embed_prefix(self, ctx: commands.Context, *, text: str):
-        """Create an embed. Usage: C!embed <text> [#RRGGBB]
-        If the last token is a hex color it will be used."""
         parts = text.rsplit(" ", 1)
         color = None
         content = text
@@ -55,7 +61,6 @@ class MiscCog(commands.Cog):
 
     @commands.hybrid_command(name="embed", with_app_command=True)
     async def embed_slash(self, ctx: commands.Context, text: str, color: Optional[str] = None):
-        """Slash: Create an embed. /embed text color(optional hex)"""
         parsed = _parse_color(color)
         emb = discord.Embed(description=text)
         if parsed is not None:
@@ -65,24 +70,29 @@ class MiscCog(commands.Cog):
 
     @commands.command(name="say")
     async def say_prefix(self, ctx: commands.Context, *, text: str):
-        """Make the bot say something. Usage: C!say <text>"""
-        await ctx.message.delete() if ctx.guild and ctx.channel.permissions_for(ctx.guild.me).manage_messages else None
+        if contains_banned(text):
+            await ctx.send("Message contains forbidden content.")
+            return
+        try:
+            if ctx.guild and ctx.channel.permissions_for(ctx.guild.me).manage_messages:
+                await ctx.message.delete()
+        except Exception:
+            pass
         await ctx.send(text, allowed_mentions=discord.AllowedMentions.none())
 
     @commands.hybrid_command(name="say", with_app_command=True)
     async def say_slash(self, ctx: commands.Context, text: str):
-        """Slash: Make the bot say something."""
-        # reply differently for slash vs prefix
+        if contains_banned(text):
+            await self._respond(ctx, content="Message contains forbidden content.", ephemeral=True)
+            return
         await self._respond(ctx, content=text)
 
     @commands.command(name="feedback")
     async def feedback_prefix(self, ctx: commands.Context, *, text: str):
-        """Send feedback to the configured feedback channel."""
         await self._post_feedback(ctx, text)
 
     @commands.hybrid_command(name="feedback", with_app_command=True)
     async def feedback_slash(self, ctx: commands.Context, text: str):
-        """Slash: Send feedback to the feedback channel."""
         await self._post_feedback(ctx, text)
 
     async def _post_feedback(self, ctx: commands.Context, text: str):
