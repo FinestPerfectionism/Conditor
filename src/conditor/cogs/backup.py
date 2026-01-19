@@ -4,7 +4,7 @@ from typing import Dict, Any
 
 import discord
 from discord.ext import commands
-from src.conditor.i18n import Localizer
+from ..i18n import Localizer
 
 
 class BackupCog(commands.Cog):
