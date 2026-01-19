@@ -119,9 +119,9 @@ async def on_ready():
 
 
 async def build_worker():
-    from src.conditor.core.planner.models import BuildPlan
-    from src.conditor.core.executor import Executor
-    from src.conditor.core.executor.discord_handler import make_discord_handler
+    from .core.planner.models import BuildPlan
+    from .core.executor import Executor
+    from .core.executor.discord_handler import make_discord_handler
 
     executor = Executor(storage_dir=Path(__file__).parent / 'data' / 'runtime')
 
@@ -189,7 +189,7 @@ async def load_cogs(bot: commands.Bot):
     for p in cogs_dir.glob("*.py"):
         if p.name.startswith("_"):
             continue
-        ext = f"src.conditor.cogs.{p.stem}"
+        ext = f"{__package__}.cogs.{p.stem}"
         try:
             logging.getLogger("conditor.bot").info("Loading extension: %s", ext)
             await bot.load_extension(ext)
