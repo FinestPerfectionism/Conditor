@@ -2,8 +2,8 @@ from typing import Any, Dict, Optional
 import json
 from pathlib import Path
 import discord
-from src.conditor.rate_limiter import run_with_rate_limit
-from src.conditor.permissions import apply_channel_overwrites, ensure_bot_role_position
+from ...rate_limiter import run_with_rate_limit
+from ...permissions import apply_channel_overwrites, ensure_bot_role_position
 from ..planner.models import BuildStep, StepType
 
 
