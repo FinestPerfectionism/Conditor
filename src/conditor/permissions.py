@@ -1,7 +1,7 @@
 from typing import Dict, Any
 
 import discord
-from src.conditor.rate_limiter import run_with_rate_limit
+from .rate_limiter import run_with_rate_limit
 
 
 async def ensure_bot_role_position(guild: discord.Guild) -> None:
