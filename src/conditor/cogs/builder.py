@@ -7,7 +7,7 @@ from typing import Any, Dict, List
 
 import discord
 from discord.ext import commands
-from src.conditor.i18n import Localizer, pluralize
+from src.conditor.i18n import Localizer
 from src.conditor import storage
 from src.conditor.rate_limiter import run_with_rate_limit
 from src.conditor.permissions import apply_channel_overwrites, ensure_bot_role_position
@@ -332,3 +332,4 @@ class BuilderCog(commands.Cog):
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(BuilderCog(bot))
+
