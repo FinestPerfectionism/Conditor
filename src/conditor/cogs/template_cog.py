@@ -5,7 +5,7 @@ from datetime import datetime
 from discord.ext import commands
 import discord
 
-from src.conditor import storage
+from .. import storage
 
 ROOT = Path(__file__).resolve().parents[3]
 AUDIT_DIR = ROOT / "data" / "audit"
