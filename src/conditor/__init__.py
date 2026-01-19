@@ -1,10 +1,10 @@
-"""planner package: compiler that turns `ServerSpec` into `BuildPlan`.
+"""Conditor package public API.
 
-Public API:
-- `compile_spec_to_plan(spec)`
+Expose commonly used symbols so importing `src.conditor` from different
+environments (module name vs package path) works reliably.
 """
 
-from .models import BuildPlan, BuildStep, StepType
-from .compiler import compile_spec_to_plan
+from . import bot
+from .core.planner.models import BuildPlan, BuildStep, StepType
 
-__all__ = ["BuildPlan", "BuildStep", "StepType", "compile_spec_to_plan"]
+__all__ = ["bot", "BuildPlan", "BuildStep", "StepType"]
