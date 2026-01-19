@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from src.conditor import bot as conditor_bot
+from . import bot as conditor_bot
 import asyncio
 
 logging.basicConfig(level=logging.INFO)
@@ -28,3 +28,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
