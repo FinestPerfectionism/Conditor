@@ -1,0 +1,21 @@
+{
+  "meta": {"name_key": "tpl_event", "languages": ["en"], "estimated_build_seconds": 90},
+  "roles": [
+    {"key":"organiser","name":"Organiser","color":"#cc5500","profile":"moderation","position":100},
+    {"key":"staff","name":"Staff","color":"#cc7733","profile":"moderation","position":90},
+    {"key":"attendee","name":"Attendee","color":"#88ccff","profile":"member","position":10}
+  ],
+  "categories": [
+    {"name":"Announcements","position":1},
+    {"name":"Schedule","position":2},
+    {"name":"Workshops","position":3},
+    {"name":"Networking","position":4}
+  ],
+  "channels": [
+    {"name":"announcements","type":"announcement","category":"Announcements"},
+    {"name":"schedule","type":"text","category":"Schedule"},
+    {"name":"workshop-1","type":"text","category":"Workshops"},
+    {"name":"networking-lounge","type":"text","category":"Networking"},
+    {"name":"voice-main","type":"voice","category":"Networking"}
+  ]
+}

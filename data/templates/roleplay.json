@@ -1,0 +1,25 @@
+{
+  "meta": {"name_key": "tpl_roleplay", "languages": ["en"], "estimated_build_seconds": 90},
+  "roles": [
+    {"key":"storyteller","name":"Storyteller","color":"#663399","profile":"moderation","position":95},
+    {"key":"gm","name":"Game Master","color":"#8800ff","profile":"moderation","position":90},
+    {"key":"player","name":"Player","color":"#ffaa00","profile":"member","position":10},
+    {"key":"audience","name":"Audience","color":"#cccccc","profile":"member","position":5}
+  ],
+  "categories": [
+    {"name":"Lore & Rules","position":1},
+    {"name":"Character Hub","position":2},
+    {"name":"In-Character","position":3},
+    {"name":"Out-of-Character","position":4}
+  ],
+  "channels": [
+    {"name":"setting","type":"text","category":"Lore & Rules"},
+    {"name":"rules","type":"text","category":"Lore & Rules"},
+    {"name":"character-creation","type":"text","category":"Character Hub"},
+    {"name":"character-sheets","type":"text","category":"Character Hub"},
+    {"name":"in-character-1","type":"text","category":"In-Character"},
+    {"name":"in-character-2","type":"text","category":"In-Character"},
+    {"name":"ooc","type":"text","category":"Out-of-Character"},
+    {"name":"casting-calls","type":"text","category":"Out-of-Character"}
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "meta": {"name_key": "tpl_political", "languages": ["en"], "estimated_build_seconds": 60},
+  "roles": [
+    {"key":"admin","name":"Admin","color":"#990000","profile":"admin","position":100},
+    {"key":"moderator","name":"Moderator","color":"#990000","profile":"moderation","position":90},
+    {"key":"member","name":"Member","color":"#333333","profile":"member","position":10}
+  ],
+  "categories": [
+    {"name":"News & Analysis","position":1},
+    {"name":"Debate Rooms","position":2},
+    {"name":"Resources","position":3},
+    {"name":"Moderation","position":99}
+  ],
+  "channels": [
+    {"name":"current-affairs","type":"text","category":"News & Analysis"},
+    {"name":"op-eds","type":"text","category":"News & Analysis"},
+    {"name":"debate-1","type":"text","category":"Debate Rooms"},
+    {"name":"policy-resources","type":"text","category":"Resources"},
+    {"name":"mod-log","type":"text","category":"Moderation","overwrites":{"Moderator":{"allow":["view_channel"]}}}
+  ]
+}

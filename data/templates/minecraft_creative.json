@@ -1,0 +1,22 @@
+{
+  "meta": {"name_key": "tpl_mc_creative", "languages": ["en"], "estimated_build_seconds": 120},
+  "roles": [
+    {"key":"owner","name":"Owner","color":"#663399","profile":"admin","position":100},
+    {"key":"staff","name":"Staff","color":"#FF5555","profile":"moderation","position":80},
+    {"key":"creator","name":"Creator","color":"#00CC99","profile":"member","position":30},
+    {"key":"guest","name":"Guest","color":"#CCCCCC","profile":"member","position":5}
+  ],
+  "categories": [
+    {"name":"Welcome","position":1},
+    {"name":"Build Zones","position":2},
+    {"name":"Gallery","position":3},
+    {"name":"Voice","position":4}
+  ],
+  "channels": [
+    {"name":"rules","type":"text","category":"Welcome"},
+    {"name":"build-requests","type":"text","category":"Build Zones"},
+    {"name":"showcase","type":"text","category":"Gallery"},
+    {"name":"voice-1","type":"voice","category":"Voice"},
+    {"name":"voice-2","type":"voice","category":"Voice"}
+  ]
+}
