@@ -7,10 +7,10 @@ from typing import Any, Dict, List
 
 import discord
 from discord.ext import commands
-from src.conditor.i18n import Localizer
-from src.conditor import storage
-from src.conditor.rate_limiter import run_with_rate_limit
-from src.conditor.permissions import apply_channel_overwrites, ensure_bot_role_position
+from ..i18n import Localizer
+from .. import storage
+from ..rate_limiter import run_with_rate_limit
+from ..permissions import apply_channel_overwrites, ensure_bot_role_position
 import io
 
 
@@ -191,9 +191,9 @@ class BuilderCog(commands.Cog):
         dry_run = dry.lower() in ("true", "1", "yes")
 
         # compile template into a BuildPlan and enqueue it for execution (include invoking guild id)
-        from src.conditor.bot import build_queue
-        from src.conditor.core.intent.models import ServerSpec
-        from src.conditor.core.planner import compile_spec_to_plan
+        from ..bot import build_queue
+        from ..core.intent.models import ServerSpec
+        from ..core.planner import compile_spec_to_plan
 
         spec = ServerSpec()
         spec.extras.setdefault('templates', []).append(tpl)
@@ -242,7 +242,7 @@ class BuilderCog(commands.Cog):
 
         # Approved — record audit and enqueue plan for execution
         from datetime import datetime
-        from src.conditor.storage import append_approval
+        from ..storage import append_approval
         from pathlib import Path
 
         ns = plan.name if hasattr(plan, 'name') else None
@@ -332,4 +332,3 @@ class BuilderCog(commands.Cog):
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(BuilderCog(bot))
-
