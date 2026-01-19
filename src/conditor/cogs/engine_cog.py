@@ -4,10 +4,10 @@ from typing import Optional
 import discord
 from discord.ext import commands
 
-from src.conditor.core.intent.models import load_template, discover_and_merge
-from src.conditor.core.planner import compile_spec_to_plan
-from src.conditor.core.executor import Executor, default_noop_handler
-from src.conditor.core.safety import validate_plan, permission_sanity_checks
+from ..core.intent.models import load_template, discover_and_merge
+from ..core.planner import compile_spec_to_plan
+from ..core.executor import Executor, default_noop_handler
+from ..core.safety import validate_plan, permission_sanity_checks
 
 
 class EngineCog(commands.Cog):
@@ -86,4 +86,3 @@ class EngineCog(commands.Cog):
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(EngineCog(bot))
-
