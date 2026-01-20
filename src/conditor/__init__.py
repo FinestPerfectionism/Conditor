@@ -1,10 +1,18 @@
-"""Conditor package public API.
+"""planner package: compiler that turns `ServerSpec` into `BuildPlan`.
 
-Expose commonly used symbols so importing `src.conditor` from different
-environments (module name vs package path) works reliably.
+Public API:
+- `compile_spec_to_plan(spec)`
 """
 
-from . import bot
-from .core.planner.models import BuildPlan, BuildStep, StepType
+from .models import BuildPlan, BuildStep, StepType
 
-__all__ = ["bot", "BuildPlan", "BuildStep", "StepType"]
+# `compiler` historically exported `compile_from_files` in older versions.
+# Import it if available to remain backward compatible with older deployments
+# or external callers that expect the symbol.
+from .compiler import compile_spec_to_plan
+
+try:
+	from .compiler import compile_from_files  # type: ignore
+	__all__ = ["BuildPlan", "BuildStep", "StepType", "compile_spec_to_plan", "compile_from_files"]
+except Exception:
+	__all__ = ["BuildPlan", "BuildStep", "StepType", "compile_spec_to_plan"]
